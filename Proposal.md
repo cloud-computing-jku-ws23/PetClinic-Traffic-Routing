@@ -16,7 +16,7 @@ We will use **[Traefik](https://traefik.io/)** to implement traffic routing usin
 |      k12113773       | Christoph Knoll   |
 |      k12104719       | Christian Steyrer |
 |      k12019969       | Richard Stock     |
-|      k               |                   |
+|      k11910655       | Alexander Do      |
 
 ## Definition and Scope
 The deployments are based on an open source project **[PetClinic](https://github.com/spring-petclinic/spring-petclinic-microservices)** a sample application consisting of Spring Boot microservices. 
@@ -24,7 +24,6 @@ The deployments are based on an open source project **[PetClinic](https://github
 The PetClinic is split into follwoing mandatory artifacts (Grafana and Prometheus *not listed* are optional):
 
 ```docker
-springcommunity/spring-petclinic-admin-server
 springcommunity/spring-petclinic-discovery-server
 springcommunity/spring-petclinic-config-server
 springcommunity/spring-petclinic-api-gateway
