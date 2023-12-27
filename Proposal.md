@@ -1,6 +1,6 @@
 # Project Proposal - Service Mesh (Traffic Routing)
 
-We will use **[Traefik](https://traefik.io/)** to implement traffic routing using a service mesh between different deployments.
+We will use **[Traefik](https://traefik.io/)** to implement traffic routing between different deployments using a service mesh.
 
 
 # Index
