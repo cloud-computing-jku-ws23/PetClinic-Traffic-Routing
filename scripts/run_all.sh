@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o errtrace
+set -o nounset
+set -o pipefail
+
+pkill -9 -f spring-petclinic || echo "Failed to kill any apps"
+
+docker-compose kill || echo "No docker containers are running"
+
+echo "Running apps"
+mkdir -p target
+nohup java -jar spring-petclinic-config-server/target/*.jar --server.port=8888 > target/config-server.log 2>&1 &
+echo "Waiting for config server to start"
+sleep 20
+nohup java -jar spring-petclinic-discovery-server/target/*.jar --server.port=8761 > target/discovery-server.log 2>&1 &
+echo "Waiting for discovery server to start"
+sleep 20
+nohup java -jar spring-petclinic-customers-service/target/*.jar --server.port=8081  > target/customers-service.log 2>&1 &
+nohup java -jar spring-petclinic-visits-service/target/*.jar --server.port=8082 > target/visits-service.log 2>&1 &
+nohup java -jar spring-petclinic-vets-service/target/*.jar --server.port=8083 > target/vets-service.log 2>&1 &
+nohup java -jar spring-petclinic-api-gateway/target/*.jar --server.port=8080 > target/gateway-service.log 2>&1 &
+echo "Waiting for apps to start"
+sleep 60
