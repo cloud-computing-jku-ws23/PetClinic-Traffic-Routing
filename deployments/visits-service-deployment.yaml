@@ -26,14 +26,7 @@ spec:
         io.kompose.service: visits-service
     spec:
       containers:
-        - command:
-            - ./dockerize
-            - -wait=tcp://discovery-server:8761
-            - -timeout=60s
-            - --
-            - java
-            - org.springframework.boot.loader.JarLauncher
-          image: springcommunity/spring-petclinic-visits-service
+        - image: springcommunity/spring-petclinic-visits-service
           imagePullPolicy: IfNotPresent
           name: visits-service
           ports:

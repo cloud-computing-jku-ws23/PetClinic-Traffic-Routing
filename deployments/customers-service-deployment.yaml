@@ -26,14 +26,7 @@ spec:
         io.kompose.service: customers-service
     spec:
       containers:
-        - command:
-            - ./dockerize
-            - -wait=tcp://discovery-server:8761
-            - -timeout=60s
-            - --
-            - java
-            - org.springframework.boot.loader.JarLauncher
-          image: springcommunity/spring-petclinic-customers-service
+        - image: springcommunity/spring-petclinic-customers-service
           imagePullPolicy: IfNotPresent
           name: customers-service
           ports:

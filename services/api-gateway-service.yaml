@@ -10,6 +10,7 @@ metadata:
   name: api-gateway
   namespace: default
 spec:
+  type: LoadBalancer
   ports:
     - name: "8080"
       port: 8080

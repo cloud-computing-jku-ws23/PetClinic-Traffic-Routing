@@ -26,14 +26,7 @@ spec:
         io.kompose.service: discovery-server
     spec:
       containers:
-        - command:
-            - ./dockerize
-            - -wait=tcp://config-server:8888
-            - -timeout=60s
-            - --
-            - java
-            - org.springframework.boot.loader.JarLauncher
-          image: springcommunity/spring-petclinic-discovery-server
+        - image: springcommunity/spring-petclinic-discovery-server
           imagePullPolicy: IfNotPresent
           name: discovery-server
           ports:
