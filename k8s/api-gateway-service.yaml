@@ -8,10 +8,12 @@ metadata:
 spec:
   ports:
   - name: "http"
-    port: 80
-    targetPort: 8080
+    port: 8080
   selector:
     app: api-gateway
-  type: LoadBalancer
-status:
-  loadBalancer: {}
+  type: NodePort
+  ports:  
+  - name: http
+    port: 8080
+    nodePort: 30036
+    protocol: TCP
