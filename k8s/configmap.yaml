@@ -21,7 +21,11 @@ data:
 
     # Metrics
     management:
+      metrics:
+        use-global-registry: false
       endpoint:
+        metrics:
+          enabled: false
         health:
           probes:
             enabled: true
@@ -43,6 +47,7 @@ data:
     visits-service-id: http://vists-service.spring-petclinic.svc.cluster.local:8080
 
     spring:
+      autoconfigure.exclude: org.springframework.boot.actuate.autoconfigure.metrics.export.wavefront.WavefrontMetricsExportAutoConfiguration
       sleuth:
         sampler:
           probability: 1.0
