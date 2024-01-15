@@ -20,7 +20,7 @@ spec:
       containers:
       - image: springcommunity/spring-petclinic-cloud-vets-service
         name: vets-service
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
             port: 8080

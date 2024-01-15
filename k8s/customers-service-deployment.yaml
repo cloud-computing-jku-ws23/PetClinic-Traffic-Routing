@@ -21,7 +21,7 @@ spec:
       containers:
       - image: springcommunity/spring-petclinic-cloud-customers-service
         name: customers-service
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
             port: 8080
