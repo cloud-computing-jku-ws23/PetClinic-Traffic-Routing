@@ -6,9 +6,6 @@ metadata:
     app: api-gateway
   name: api-gateway
 spec:
-  ports:
-  - name: "http"
-    port: 8080
   selector:
     app: api-gateway
   type: NodePort

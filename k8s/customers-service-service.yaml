@@ -5,6 +5,9 @@ metadata:
   labels:
     app: customers-service
   name: customers-service
+  annotations:
+    mesh.traefik.io/ratelimit-average: "10"
+    mesh.traefik.io/ratelimit-burst: "10"
 spec:
   ports:
   - name: "http"

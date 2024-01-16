@@ -14,7 +14,7 @@ For Windows:
 sh pull.sh
 ```
 
-### Deploy to Kubernates
+### Deploy to Kubernetes
 For Windows:
 ```sh
 sh deploy.sh
@@ -22,3 +22,28 @@ sh deploy.sh
 
 ### Change namespace
 kubectl config set-context --current --namespace=spring-petclinic
+
+### Traefik Mesh install
+helm repo add traefik https://traefik.github.io/charts
+helm repo update
+helm install traefik-mesh traefik/traefik-mesh
+
+### Add annotations (e.g. rate limits)
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: customers-service
+  name: customers-service
+  annotations:
+    mesh.traefik.io/ratelimit-average: "10"
+    mesh.traefik.io/ratelimit-burst: "10"
+spec:
+  # ...
+status:
+  # ...
+```
+
+### Live demo with postman

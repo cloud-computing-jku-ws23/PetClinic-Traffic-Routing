@@ -1,0 +1,44 @@
+{
+	"info": {
+		"_postman_id": "5fbff212-cc2a-4963-824b-d155100009e7",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32374819"
+	},
+	"item": [
+		{
+			"name": "http://localhost:30036/api/customer/owners",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:30036/api/customer/owners",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "30036",
+					"path": [
+						"api",
+						"customer",
+						"owners"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
