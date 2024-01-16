@@ -43,8 +43,8 @@ data:
           exposure:
             include: '*'
 
-    customers-service-id: http://customers-service.spring-petclinic.svc.cluster.local:8080
-    visits-service-id: http://vists-service.spring-petclinic.svc.cluster.local:8080
+    customers-service-id: http://customers-service.spring-petclinic.traefik.mesh:8080
+    visits-service-id: http://vists-service.spring-petclinic.traefik.mesh:8080
 
     spring:
       autoconfigure.exclude: org.springframework.boot.actuate.autoconfigure.metrics.export.wavefront.WavefrontMetricsExportAutoConfiguration
@@ -75,19 +75,19 @@ data:
             proto-append: false
           routes:
             - id: vets-service
-              uri: http://vets-service.spring-petclinic.svc.cluster.local:8080
+              uri: http://vets-service.spring-petclinic.traefik.mesh:8080
               predicates:
                 - Path=/api/vet/**
               filters:
                 - StripPrefix=2
             - id: visits-service
-              uri: http://visits-service.spring-petclinic.svc.cluster.local:8080
+              uri: http://visits-service.spring-petclinic.traefik.mesh:8080
               predicates:
                 - Path=/api/visit/**
               filters:
                 - StripPrefix=2
             - id: customers-service
-              uri: http://customers-service.spring-petclinic.svc.cluster.local:8080
+              uri: http://customers-service.spring-petclinic.traefik.mesh:8080
               predicates:
                 - Path=/api/customer/**
               filters:
