@@ -24,10 +24,11 @@ sh deploy.sh
 kubectl config set-context --current --namespace=spring-petclinic
 
 ### Traefik Mesh install
+```sh 
 helm repo add traefik https://traefik.github.io/charts
 helm repo update
 helm install traefik-mesh traefik/traefik-mesh
-
+```
 ### Add annotations (e.g. rate limits)
 
 ```
