@@ -66,39 +66,37 @@ This type of architecture is non-invasive. Instead of invasively modifying routi
 ### 1. Convert Docker-Compose to Kubernetes File
 To convert the docker-compose file to single yaml files for ech microservice we used Kompose.
 
-#### Use [Kompose](https://kompose.io/) to convert docker-compose to kubernetes deployment files.
-
+#### Use [Kompose](https://kompose.io/) to convert docker-compose to kubernetes deployment files. (This step is just for documentation how we set up our enviroment, and shall not done, since deployment files are set up once.)
 ```bash
 kompose convert
 ```
 > Splits docker-compose.yaml into separate deployment files for each microservice. 
 
+Edit deployment files to fit our use case:
+* Specify resources, ports, env, etc.
+* Remove docker related commands (e.g. dockerize)
+
+
 ### 2. Set up Kubernetes Cluster
-After we setup our System to use our Kupernetes we added our deployment settings for our yaml files.
+After we setup our System to use our Kubernetes we added our deployment settings for our yaml files.
 
 #### Add image pull policy to all deployment .yaml files
 ```yaml
-...
-containers:
-        - command:
-            - ./dockerize
-            - -wait=tcp://discovery-server:8761
-            - -timeout=60s
-            - --
-            - java
-            - org.springframework.boot.loader.JarLauncher
-          image: springcommunity/spring-petclinic-visits-service
-          imagePullPolicy: IfNotPresent
-          name: visits-service
-          ports:
-            - containerPort: 8082
-              hostPort: 8082
-              protocol: TCP
-          resources:
-            limits:
-              memory: "536870912"
-      restartPolicy: Always
-...
+# ...
+    containers:
+        - image: springcommunity/spring-petclinic-cloud-visits-service
+            name: visits-service
+            imagePullPolicy: IfNotPresent
+            livenessProbe:
+            httpGet:
+                port: 8080
+                path: /actuator/health/liveness
+            # ...
+            ports:
+            - containerPort: 8080
+            resources: {}
+        restartPolicy: Always
+# ...
 ```
 When the deployment was working we made a shell script which automatically deploy all of the microservices. 
 
@@ -175,13 +173,13 @@ kubectl config set-context --current --namespace=spring-petclinic
 
 ### Images of the project 
 ```docker
-springcommunity/spring-petclinic-api-gateway
-springcommunity/spring-petclinic-customers-service
-springcommunity/spring-petclinic-visits-service
-springcommunity/spring-petclinic-vets-service
+springcommunity/spring-petclinic-cloud-api-gateway
+springcommunity/spring-petclinic-cloud-customers-service
+springcommunity/spring-petclinic-cloud-visits-service
+springcommunity/spring-petclinic-cloud-vets-service
 ```
 
-> **Admin**, **Config**, **Discovery**, **Grafana** and **Prometheus** will be left out because they are optional.
+> **Admin**, **Config**, **Discovery**, **Grafana** and **Prometheus** will be left out because they are optional or not needed.
 
 ### Pull needed images from docker hub
 
