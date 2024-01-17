@@ -181,8 +181,7 @@ springcommunity/spring-petclinic-cloud-vets-service
 
 > **Admin**, **Config**, **Discovery**, **Grafana** and **Prometheus** will be left out because they are optional or not needed.
 
-### Pull needed images from docker hub
-
+### Pull needed images from docker hub (and load to kind if kind is used)
 #### **`pull.sh:`**
 ```bash
 docker-compose pull
