@@ -109,8 +109,8 @@ To access the Traefik mesh api, we need to set up a port forward of the Traefik 
 ```bash
 #!/usr/bin/env bash
 
-pod=$(kubectl get pods -n traefik-mesh -o wide | grep traefik-mesh-controller | awk '{print $1}')
-kubectl port-forward pod/$pod -n traefik-mesh 9000:9000
+pod=$(kubectl get pods -n spring-petclinic -o wide | grep traefik-mesh-controller | awk '{print $1}')
+kubectl port-forward pod/$pod -n spring-petclinic 9000:9000
 
 read -p "Press Enter to exit..."
 ```
